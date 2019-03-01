@@ -2,6 +2,18 @@
 **写在前面**
 之前一直是在remix-ide上面编写智能合约，然后开发dapp前端，若想通过这种方式可以参考百度云区块链的教程
 教程链接：https://cloud.baidu.com/doc/BBE/DevRef.html#.85.E2.02.85.99.E3.AA.D8.B7.75.57.37.C7.67.5D.CE
+想在想体验一下通过truffle开发一个DApp，毕竟[https://github.com/trufflesuite/truffle](truffle)致力于让以太坊以太坊上的开发变得简单，有以下特点：
+ - 内置智能合约编译、链接、部署和二进制字节码管理 
+ - 针对快速迭代开发的自动化合约测试 
+ - 可脚本化，可扩展的部署和迁移框架 
+ - 网络管理，用于部署到任意数量的公共和私有网络 
+ - 使用EthPM和NPM进行包安装管理 
+ - 用于直接合约通信的交互式控制台 
+ - 支持持续集成的可配置构建管道 
+ - 外部脚本运行程序可以在Truffle环境中执行脚本 
+ - 提供了合约抽象接口 
+ - 提供了控制台，使用框架构建后，可以直接在命令行调用输出结果，可极大方便开发调试
+
 **1. 开发环境配置**
  - Node v9.11.2
  - npm 5.6.0
@@ -107,6 +119,7 @@ truffle test
 ![图片](http://agroup-bos.cdn.bcebos.com/4cc18b9b30c4ba228e628da3f77a90bfc5ed07f4)
 
 **9. 创建用户界面与智能合约交互**
+
 我们已经编写完合约，并且部署在本地测试环境中并缺确定它能在命令行中进行交互。现在我们要开始创建UI界面来使用它。
 
 使用Truffle Box来创建的pet-shop代码中已经包含了前端界面，在 src/ 目录中
@@ -117,7 +130,7 @@ truffle test
 2、打开这个文件你会注意到，全局变量App控制着应用，init（）方法加载数据，然后调用了initWeb3（）。web3提供了与以太坊交互的接口
 
 3、删除 initWeb3 中的注释并替换成如下代码
-
+```
 // Is there an injected web3 instance? 
 if (typeof web3 !== 'undefined') {
   App.web3Provider = web3.currentProvider; 
@@ -126,11 +139,12 @@ if (typeof web3 !== 'undefined') {
   App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545'); 
 }
 web3 = new Web3(App.web3Provider);
+```
 **11. 合约实例化**
 我们已经能通过web3和以太坊交互了，我们还需要实例化我们的智能合约，这样web3才知道要去哪里找到并执行我们的智能合约。Truffle包含的truffle-contract库文件来帮我们做这件事。它存储了合约部署的信息，所以你不需要手动更改合约部署地址。
 
 1、还是在/src/js/app.js文件中， 删除initContract 中的注释，并替换成以下代码：
-
+```
 $.getJSON('Adoption.json', function(data) {
   // Get the necessary contract artifact file and instantiate it with truffle-contract
   var AdoptionArtifact = data;
@@ -142,9 +156,10 @@ $.getJSON('Adoption.json', function(data) {
   // Use our contract to retrieve and mark the adopted pets
   return App.markAdopted();
 });
+```
 **12. 获取购买的宠物并更新UI界面**
 1、还是在/src/js/app.js文件中，删除markAdopted 中的注释并替换成如下代码：
-
+```
 var adoptionInstance;
 
 App.contracts.Adoption.deployed().then(function(instance) {
@@ -160,9 +175,10 @@ App.contracts.Adoption.deployed().then(function(instance) {
 }).catch(function(err) {
   console.log(err.message);
 }); 
+```
 **13. 执行adopt（）方法**
 1、handleAdopt 下面替换成如下代码
-
+```
 var adoptionInstance;
 
 web3.eth.getAccounts(function(error, accounts) {
@@ -183,7 +199,7 @@ web3.eth.getAccounts(function(error, accounts) {
     console.log(err.message);
   });
 });
-
+```
 **14. 在浏览器中使用dapp**
 1、使用chrome
 
