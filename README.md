@@ -1,4 +1,7 @@
 # Truffle搭建一个简易版的宠物收养Dapp 
+**写在前面**
+之前一直是在remix-ide上面编写智能合约，然后开发dapp前端，若想通过这种方式可以参考百度云区块链的教程
+教程链接：https://cloud.baidu.com/doc/BBE/DevRef.html#.85.E2.02.85.99.E3.AA.D8.B7.75.57.37.C7.67.5D.CE
 **1. 开发环境配置**
  - Node v9.11.2
  - npm 5.6.0
@@ -209,5 +212,7 @@ web3.eth.getAccounts(function(error, accounts) {
 5、交易完成后metamask中会有你的交易记录
 ![图片](http://agroup-bos.cdn.bcebos.com/e6b55a4f194fcae2cc5e88c6ba1d15fa84d7af7c)
 
-参考文档：https://zhuanlan.zhihu.com/p/35076425
-github：
+相关链接：
+truffle搭建DApp： https://zhuanlan.zhihu.com/p/35076425
+github：https://github.com/faxia/trufflePetShopDapp
+remix-ide + react开发UI版教程链接：https://cloud.baidu.com/doc/BBE/DevRef.html#.85.E2.02.85.99.E3.AA.D8.B7.75.57.37.C7.67.5D.CE
